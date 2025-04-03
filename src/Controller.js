@@ -17,9 +17,13 @@ export class Controller{
     constructor(){
         this.tasks = []
         this.projects = []
-        this.defaultProject = new Project("Default")
-        this.projects.push(this.defaultProject)
-        this.currentProjectId = this.defaultProject.id
+        if(!JSON.parse(localStorage.getItem("projects"))){
+            this.defaultProject = new Project("Default")
+            this.projects.push(this.defaultProject)
+            this.currentProjectId = this.defaultProject.id
+            localStorage.setItem("projects", JSON.stringify(this.projects))
+        }
+        
         this.currentScreen = "inbox"
     }
 
@@ -171,6 +175,8 @@ export class Controller{
         this.projects.forEach((project, i) => {
             project.id = projectsData[i].id
         })
+        this.defaultProject = this.projects[0]
+        this.currentProjectId = this.defaultProject.id
     }
 
 
