@@ -1,5 +1,5 @@
-import { format } from 'date-fns'
+import { Controller } from "./Controller.js"
+import "./style.css"
 
-const now = format(new Date(), "dd MMMM yyyy")
-
-console.log(now)
+const c = new Controller()
+c.init()
